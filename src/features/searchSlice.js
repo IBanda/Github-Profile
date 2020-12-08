@@ -2,10 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchUser = createAsyncThunk(
   'search/githubUser',
   async (username) => {
-    const fetchData = await fetch(`https://api.github.com/users/${username}`, {
-      method: 'GET',
-      mode: 'no-cors',
-    });
+    const fetchData = await fetch(`https://api.github.com/users/${username}`);
     const response = await fetchData.json();
     return response;
   }
