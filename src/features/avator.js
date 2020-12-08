@@ -1,0 +1,23 @@
+import styled from 'styled-components';
+
+const Avatar = styled.img`
+  max-width: 130px;
+  width: 100%;
+`;
+
+const AvatarWrapper = styled.div`
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: none;
+  position: absolute;
+  top: -70px;
+  background-color: #576ca8;
+`;
+
+export default function AvatarIMG({ src }) {
+  return (
+    <AvatarWrapper>{!!src && <Avatar src={src} alt="avatar" />}</AvatarWrapper>
+  );
+}

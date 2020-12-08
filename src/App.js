@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import Search from './features/search';
+import SearchResult from './features/search-result';
+import Toggle from './toggle';
 
+const GlobalStyles = createGlobalStyle`
+html{
+  height:100%;
+}
+*{
+  box-sizing:border-box;
+}
+body{
+ margin:0;
+ background-color:${(props) => props.theme.bg}
+}
+`;
 function App() {
+  const [theme, setTheme] = useState({ bg: '#fff' });
+  const onToggle = () => {
+    setTheme((prev) =>
+      prev.bg === '#3c4f65'
+        ? { ...prev, bg: '#fff' }
+        : { ...prev, bg: '#3c4f65' }
+    );
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Toggle onToggle={onToggle} />
+      <GlobalStyles />
+      <Search />
+      <SearchResult />
+    </ThemeProvider>
   );
 }
 
