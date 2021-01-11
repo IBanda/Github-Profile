@@ -27,6 +27,18 @@
     <title>React App</title>
   </head>
   <body>
+    <script type="text/javascript">
+      (function () {
+        try {
+          var mode = localStorage.getItem('theme');
+          if (mode) {
+            document.body.classList.add(mode);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      })();
+    </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

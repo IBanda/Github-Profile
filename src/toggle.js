@@ -2,9 +2,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const ToggleWrapper = styled.div`
-  background-color: ${(props) => (props.isToggled ? '#ebebeb' : '#fff')};
   width: 50px;
+  height: 25px;
+  padding: 0 5px;
   position: absolute;
+  display: flex;
+  align-items: center;
   top: 1em;
   right: 1em;
   border-radius: 999px;
@@ -15,7 +18,6 @@ const ToggleWrapper = styled.div`
     border-radius: 50%;
     background-color: #94b4a4;
     transition: transform 500ms;
-    transform: translateX(${(props) => (props.isToggled ? 30 : 0)}px);
   }
 `;
 
@@ -26,7 +28,11 @@ export default function Toggle({ onToggle }) {
     onToggle();
   };
   return (
-    <ToggleWrapper isToggled={isToggled} onClick={onClick}>
+    <ToggleWrapper
+      className="toggle-wrapper"
+      isToggled={isToggled}
+      onClick={onClick}
+    >
       <div className="toggle" />
     </ToggleWrapper>
   );

@@ -9,9 +9,7 @@ const ResultDiv = styled.div`
   margin: auto;
   padding: 1em;
   border-radius: 0 0 5px 5px;
-  background-color: ${(props) =>
-    props.theme.bg === '#fff' ? '#f5f3f5' : '#213e3b'};
-  color: ${(props) => (props.theme.bg === '#fff' ? '#000' : '#fff')};
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
   & > .avatar-container {
     display: flex;
     position: relative;
@@ -31,7 +29,7 @@ const ResultDiv = styled.div`
 export default function SearchResult() {
   const { user } = useSelector((state) => state.user);
   return (
-    <ResultDiv>
+    <ResultDiv className="results">
       <div className="avatar-container">
         <Avatar src={user?.avatar_url} />
       </div>

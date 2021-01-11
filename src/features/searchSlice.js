@@ -16,6 +16,7 @@ const searchSlice = createSlice({
     [fetchUser.fulfilled]: (state, action) => {
       state.user = action.payload;
       state.message = action.payload.message;
+
       if (action.payload.message) {
         state.status = 'error';
       } else {

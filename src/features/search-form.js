@@ -14,6 +14,7 @@ const Form = styled.form`
     border-radius: 5px;
     outline: none;
     margin-bottom: 15px;
+    font-size: 16px !important;
     display: block;
     &:focus {
       box-shadow: 1px 2px 10px 1px #576ca8;

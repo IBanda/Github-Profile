@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { useState, useEffect } from 'react';
+import { createGlobalStyle } from 'styled-components';
 import Search from './features/search';
 import SearchResult from './features/search-result';
 import Toggle from './toggle';
@@ -13,25 +13,67 @@ html{
 }
 body{
  margin:0;
- background-color:${(props) => props.theme.bg}
+}
+body.light{
+background-color:#fff;
+.toggle-wrapper{
+background-color:#fff;
+.toggle{
+  transform: translateX(0);
+}
+}
+.results{
+  background-color:#f5f3f5;
+  color:#000;
+}
+}
+body.dark{
+  background-color:#3c4f65;
+  .toggle-wrapper{
+background-color:#ebebeb;
+  .toggle{
+  transform: translateX(20px);
+}
+  }
+  .results{
+  background-color:#213e3b;
+  color:#fff;
+  }
 }
 `;
+function addClass(mode) {
+  const body = document.body;
+  if (mode === 'light') {
+    body.classList.remove('dark');
+    body.classList.add(mode);
+  } else {
+    body.classList.remove('light');
+    body.classList.add(mode);
+  }
+}
 function App() {
-  const [theme, setTheme] = useState({ bg: '#fff' });
+  // eslint-disable-next-line no-unused-vars
+  const [theme, setTheme] = useState({ mode: 'light' });
+
+  useEffect(() => {
+    setTheme({ mode: localStorage.getItem('theme') });
+  }, []);
+
   const onToggle = () => {
-    setTheme((prev) =>
-      prev.bg === '#3c4f65'
-        ? { ...prev, bg: '#fff' }
-        : { ...prev, bg: '#3c4f65' }
-    );
+    setTheme((prev) => {
+      const prevTheme = { mode: prev.mode === 'light' ? 'dark' : 'light' };
+      addClass(prevTheme.mode);
+      window.localStorage.setItem('theme', prevTheme.mode);
+      return prevTheme;
+    });
   };
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Toggle onToggle={onToggle} />
       <GlobalStyles />
       <Search />
       <SearchResult />
-    </ThemeProvider>
+    </>
   );
 }
 

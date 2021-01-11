@@ -14,6 +14,7 @@ const AvatarWrapper = styled.div`
   position: absolute;
   top: -70px;
   background-color: #576ca8;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
 `;
 
 export default function AvatarIMG({ src }) {
