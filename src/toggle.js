@@ -7,6 +7,7 @@ const ToggleWrapper = styled.div`
   height: 25px;
   padding: 0 5px;
   position: absolute;
+  background-color: #fff;
   display: flex;
   align-items: center;
   top: 1em;
@@ -19,6 +20,7 @@ const ToggleWrapper = styled.div`
     border-radius: 50%;
     background-color: #94b4a4;
     transition: transform 500ms;
+    transform: translateX(0);
   }
 `;
 
@@ -28,7 +30,9 @@ export default function Toggle() {
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    setTheme(localStorage.getItem('theme'));
+    if (localStorage.getItem('theme')) {
+      setTheme(localStorage.getItem('theme'));
+    }
   }, []);
 
   const onToggle = () => {

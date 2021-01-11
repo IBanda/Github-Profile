@@ -9,6 +9,8 @@ const ResultDiv = styled.div`
   margin: auto;
   padding: 1em;
   border-radius: 0 0 5px 5px;
+  background-color: #f5f3f5;
+  color: #000;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
   & > .avatar-container {
     display: flex;
