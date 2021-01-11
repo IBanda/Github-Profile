@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import addClassToBody from './util';
 
 const ToggleWrapper = styled.div`
   width: 50px;
@@ -21,8 +22,23 @@ const ToggleWrapper = styled.div`
   }
 `;
 
-export default function Toggle({ onToggle }) {
+export default function Toggle() {
   const [isToggled, setToggled] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    setTheme(localStorage.getItem('theme'));
+  }, []);
+
+  const onToggle = () => {
+    setTheme((prev) => {
+      const nextTheme = prev === 'light' ? 'dark' : 'light';
+      addClassToBody(nextTheme);
+      window.localStorage.setItem('theme', nextTheme);
+      return nextTheme;
+    });
+  };
   const onClick = () => {
     setToggled((prev) => !prev);
     onToggle();
